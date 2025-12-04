@@ -267,7 +267,7 @@
             visibility: visible;
         }
 
-        /* LinkedIn-style Header */
+        /* LinkedIn-style Header - FIXED */
         .profile-header {
             margin-top: 70px;
             position: relative;
@@ -278,6 +278,8 @@
             height: 250px;
             overflow: hidden;
             position: relative;
+            width: 100%;
+            background: var(--bg-secondary);
         }
 
         .cover-image {
@@ -287,31 +289,46 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            transition: all 0.5s ease;
         }
 
-        [data-theme="light"] .cover-image:empty {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        [data-theme="light"] .cover-image {
+            background-image: url('https://drive.google.com/thumbnail?id=1wn-j1VmnRxND7icRrmfqZibOO51jE9AC&sz=w1500');
         }
 
-        .profile-container {
+        [data-theme="dark"] .cover-image {
+            background-image: url('https://drive.google.com/thumbnail?id=1wn-j1VmnRxND7icRrmfqZibOO51jE9AC&sz=w1500');
+            filter: brightness(0.8);
+        }
+
+        .profile-wrapper {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
             position: relative;
         }
 
-        .profile-image-container {
+        .profile-main-content {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding-top: 60px;
+        }
+
+        .profile-avatar-section {
             position: absolute;
             top: -80px;
             left: 2rem;
+            z-index: 2;
+        }
+
+        .profile-image-container {
             width: 160px;
             height: 160px;
             border-radius: 50%;
-            border: 4px solid var(--bg-primary);
+            border: 5px solid var(--bg-primary);
             overflow: hidden;
             background: var(--bg-secondary);
-            box-shadow: 0 10px 40px var(--shadow);
+            box-shadow: 0 4px 20px var(--shadow);
         }
 
         .profile-image {
@@ -323,14 +340,16 @@
             background-repeat: no-repeat;
         }
 
-        .profile-info {
-            padding: 90px 0 40px 200px;
+        .profile-info-section {
+            padding-left: 180px;
+            padding-top: 20px;
         }
 
         .profile-name {
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
         .profile-title {
@@ -350,10 +369,16 @@
         .profile-tag {
             background: var(--stat-bg);
             color: var(--text-primary);
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.85rem;
             border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
         /* Hero Section */
@@ -1021,8 +1046,8 @@
 
         /* Responsive Design */
         @media (max-width: 1024px) {
-            .profile-info {
-                padding: 90px 0 40px 180px;
+            .profile-info-section {
+                padding-left: 160px;
             }
             
             .hero h1 {
@@ -1047,18 +1072,23 @@
                 height: 200px;
             }
 
-            .profile-image-container {
+            .profile-avatar-section {
                 position: relative;
-                width: 140px;
-                height: 140px;
                 top: -70px;
-                left: 50%;
-                transform: translateX(-50%);
-                margin-bottom: -50px;
+                left: 0;
+                display: flex;
+                justify-content: center;
+                margin-bottom: -40px;
             }
 
-            .profile-info {
-                padding: 30px 0 40px 0;
+            .profile-image-container {
+                width: 140px;
+                height: 140px;
+            }
+
+            .profile-info-section {
+                padding-left: 0;
+                padding-top: 0;
                 text-align: center;
             }
 
@@ -1071,6 +1101,10 @@
             }
 
             .profile-tags {
+                justify-content: center;
+            }
+
+            .profile-actions {
                 justify-content: center;
             }
 
@@ -1093,7 +1127,7 @@
             }
 
             .stats {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
 
@@ -1174,7 +1208,6 @@
             .profile-image-container {
                 width: 120px;
                 height: 120px;
-                top: -60px;
             }
 
             .profile-tag {
@@ -1206,6 +1239,19 @@
             .footer-name {
                 font-size: 1.8rem;
             }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+            }
         }
 
         @media (max-width: 360px) {
@@ -1220,6 +1266,30 @@
             .profile-name {
                 font-size: 1.6rem;
             }
+
+            .profile-image-container {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        /* Typing Animation */
+        .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 3px solid var(--accent);
+            white-space: nowrap;
+            animation: typing 3.5s steps(20, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent) }
         }
     </style>
 </head>
@@ -1278,28 +1348,30 @@
     <!-- LinkedIn-style Profile Header -->
     <div class="profile-header">
         <div class="cover-container">
-            <!-- COVER IMAGE FROM PROVIDED LINK -->
-            <div class="cover-image" style="background-image: url('https://drive.google.com/thumbnail?id=1wn-j1VmnRxND7icRrmfqZibOO51jE9AC&sz=w1500')"></div>
+            <div class="cover-image"></div>
         </div>
-        <div class="profile-container">
-            <div class="profile-image-container">
-                <!-- PROFILE IMAGE FROM PROVIDED LINK -->
-                <div class="profile-image" style="background-image: url('https://drive.google.com/thumbnail?id=1_Z5_6CplRbjSYpjSnXslgurbL3kMfJup&sz=w1000')"></div>
-            </div>
-            <div class="profile-info">
-                <h1 class="profile-name">Rimon Ahmed</h1>
-                <p class="profile-title">Flutter Developer | Mobile App Developer</p>
-                <div class="profile-tags">
-                    <span class="profile-tag">Flutter</span>
-                    <span class="profile-tag">Dart</span>
-                    <span class="profile-tag">Android</span>
-                    <span class="profile-tag">iOS</span>
-                    <span class="profile-tag">REST API</span>
-                    <span class="profile-tag">Firebase</span>
+        <div class="profile-wrapper">
+            <div class="profile-main-content">
+                <div class="profile-avatar-section">
+                    <div class="profile-image-container">
+                        <div class="profile-image" style="background-image: url('https://drive.google.com/thumbnail?id=1_Z5_6CplRbjSYpjSnXslgurbL3kMfJup&sz=w1000')"></div>
+                    </div>
                 </div>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="#projects" class="btn btn-secondary">View My Work</a>
+                <div class="profile-info-section">
+                    <h1 class="profile-name typing-text">Rimon Ahmed</h1>
+                    <p class="profile-title">Flutter Developer | Mobile App Developer</p>
+                    <div class="profile-tags">
+                        <span class="profile-tag">Flutter</span>
+                        <span class="profile-tag">Dart</span>
+                        <span class="profile-tag">Android</span>
+                        <span class="profile-tag">iOS</span>
+                        <span class="profile-tag">REST API</span>
+                        <span class="profile-tag">Firebase</span>
+                    </div>
+                    <div class="profile-actions">
+                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                        <a href="#projects" class="btn btn-secondary">View My Work</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1921,6 +1993,32 @@
                     profileImage.style.opacity = '1';
                 }, 300);
             }
+            
+            // Name animation
+            const nameElement = document.querySelector('.profile-name');
+            const nameText = nameElement.textContent;
+            nameElement.textContent = '';
+            nameElement.classList.remove('typing-text');
+            
+            // Create new element for typing effect
+            const typingElement = document.createElement('span');
+            typingElement.className = 'typing-text';
+            nameElement.appendChild(typingElement);
+            
+            // Type the name letter by letter
+            let i = 0;
+            function typeWriter() {
+                if (i < nameText.length) {
+                    typingElement.textContent += nameText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                } else {
+                    typingElement.style.borderRight = 'none';
+                }
+            }
+            
+            // Start typing animation after a short delay
+            setTimeout(typeWriter, 500);
         });
     </script>
 </body>
