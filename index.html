@@ -489,7 +489,7 @@
             animation: fadeIn 0.8s ease-out;
         }
 
-        /* Cover Photo */
+        /* ===== COVER PHOTO - DESKTOP VIEW ===== */
         .cover-photo {
             position: relative;
             height: 250px;
@@ -510,7 +510,7 @@
             transform: scale(1.05);
         }
 
-        /* Profile Info Container */
+        /* ===== PROFILE INFO CONTAINER ===== */
         .profile-info-container {
             background: var(--bg-primary);
             border-radius: 0 0 8px 8px;
@@ -522,18 +522,20 @@
             animation: slideInUp 0.6s ease-out 0.2s both;
         }
 
-        /* Profile Photo */
+        /* ===== PROFILE PHOTO - DESKTOP VIEW ===== */
         .profile-photo-container {
             position: absolute;
             top: -75px;
             left: 24px;
             z-index: 2;
             animation: float 4s ease-in-out infinite 0.5s;
+            width: 150px;
+            height: 150px;
         }
 
         .profile-photo {
-            width: 150px;
-            height: 150px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             border: 4px solid var(--bg-primary);
             overflow: hidden;
@@ -578,7 +580,7 @@
             transform: scale(1.1);
         }
 
-        /* Profile Content */
+        /* ===== PROFILE CONTENT ===== */
         .profile-content {
             padding: 24px 24px 16px 24px;
             padding-left: 190px;
@@ -686,7 +688,7 @@
             background: var(--primary-light);
         }
 
-        /* Profile Stats */
+        /* ===== PROFILE STATS ===== */
         .profile-stats {
             display: flex;
             border-top: 1px solid var(--border);
@@ -2000,10 +2002,6 @@
             .profile-content {
                 padding-left: 180px;
             }
-            
-            .cover-photo {
-                height: 220px;
-            }
         }
 
         /* Tablet: 768px - 991px */
@@ -2029,33 +2027,6 @@
                 margin-bottom: 0;
             }
             
-            .profile-content {
-                padding-left: 24px;
-                padding-top: 90px;
-            }
-            
-            .profile-photo-container {
-                top: -60px;
-                left: 50%;
-                transform: translateX(-50%);
-                text-align: center;
-            }
-            
-            .profile-photo {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .profile-name,
-            .profile-title,
-            .profile-location {
-                text-align: center;
-            }
-            
-            .profile-actions {
-                justify-content: center;
-            }
-            
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -2063,10 +2034,6 @@
             
             .footer-links {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .cover-photo {
-                height: 200px;
             }
             
             h1 { font-size: 2rem; }
@@ -2090,39 +2057,74 @@
                 display: none;
             }
             
-            /* Profile Header */
+            /* COVER PHOTO MOBILE FIX */
             .cover-photo {
                 height: 180px;
             }
             
-            .profile-photo {
-                width: 100px;
-                height: 100px;
+            /* COVER IMAGE MOBILE FIX - All content show korar jonno object-fit: contain use korsi */
+            .cover-photo img {
+                object-fit: contain;
+                object-position: center;
+                width: 100%;
+                height: 100%;
             }
             
+            /* PROFILE PHOTO MOBILE FIX - Center aligned */
             .profile-photo-container {
-                top: -50px;
+                position: absolute;
+                top: -60px;
+                left: 40%;
+                transform: translateX(-50%);
+                width: 120px;
+                height: 120px;
             }
             
+            /* PROFILE CONTENT MOBILE FIX - Center aligned and proper spacing */
             .profile-content {
-                padding-top: 70px;
+                padding-left: 24px;
+                padding-top: 80px;
+                text-align: center;
+                padding-right: 24px;
             }
             
             .profile-name {
                 font-size: 1.6rem;
+                text-align: center;
             }
             
             .profile-title {
                 font-size: 1rem;
+                text-align: center;
+                justify-content: center;
             }
             
             .profile-location {
                 font-size: 0.9rem;
+                text-align: center;
+                justify-content: center;
             }
             
+            /* PROFILE ACTIONS MOBILE FIX - Stack buttons */
+            .profile-actions {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                width: 100%;
+            }
+            
+            .profile-actions .btn,
+            .profile-actions .cv-download-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+            
+            /* PROFILE STATS MOBILE FIX */
             .profile-stats {
                 justify-content: center;
                 text-align: center;
+                padding: 12px;
             }
             
             .stat-item {
@@ -2207,17 +2209,6 @@
             .cv-section i {
                 font-size: 2.5rem;
             }
-            
-            /* Profile Actions */
-            .profile-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
         }
 
         /* Mobile Small: 375px - 575px */
@@ -2230,43 +2221,54 @@
             h2 { font-size: 1.2rem; }
             h3 { font-size: 1rem; }
             
-            /* Profile */
+            /* COVER PHOTO SMALL MOBILE FIX */
             .cover-photo {
-                height: 150px;
+                height: 160px;
             }
             
-            .profile-photo {
-                width: 90px;
-                height: 90px;
+            .cover-photo img {
+                object-fit: contain;
+                object-position: center;
             }
             
+            /* PROFILE PHOTO SMALL MOBILE FIX */
             .profile-photo-container {
-                top: -45px;
+                top: -50px;
+                width: 100px;
+                height: 100px;
             }
             
             .profile-content {
-                padding-top: 60px;
+                padding-top: 70px;
             }
             
             .profile-name {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
             }
             
             .profile-title {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
             
             .profile-location {
                 font-size: 0.85rem;
             }
             
+            /* PROFILE STATS SMALL MOBILE FIX */
             .profile-stats {
-                padding: 12px 16px;
+                padding: 10px 16px;
                 gap: 15px;
             }
             
+            .stat-item {
+                flex: 0 0 calc(50% - 15px);
+                text-align: center;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+            
             .stat-number {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
             
             .stat-label {
@@ -2325,28 +2327,33 @@
                 padding: 0 8px;
             }
             
-            .profile-photo {
-                width: 80px;
-                height: 80px;
+            /* COVER PHOTO EXTRA SMALL FIX */
+            .cover-photo {
+                height: 140px;
             }
             
+            /* PROFILE PHOTO EXTRA SMALL FIX */
             .profile-photo-container {
-                top: -40px;
+                top: -45px;
+                width: 90px;
+                height: 90px;
             }
             
             .profile-content {
-                padding-top: 50px;
+                padding-top: 65px;
             }
             
+            /* PROFILE STATS EXTRA SMALL FIX */
             .profile-stats {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
+                flex-wrap: wrap;
                 gap: 12px;
             }
             
             .stat-item {
-                width: 100%;
+                flex: 0 0 calc(50% - 12px);
                 align-items: center;
+                text-align: center;
             }
             
             .section-title {
